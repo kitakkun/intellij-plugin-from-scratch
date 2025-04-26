@@ -1,5 +1,6 @@
 package greeting
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
@@ -10,7 +11,7 @@ import org.jetbrains.jewel.ui.component.Text
 
 class GreetingToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val counterStateService = project.service<GreetingCounterStateService>()
+        val counterStateService = ApplicationManager.getApplication().service<GreetingCounterStateService>()
         toolWindow.addComposeTab {
             DefaultButton(onClick = { counterStateService.counter++ }) {
                 Text("Click me!! ${counterStateService.counter}")
